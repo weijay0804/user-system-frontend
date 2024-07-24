@@ -46,6 +46,12 @@ function VerifiedAccountPage() {
                     setMsg("驗證失敗，請重新驗證您的帳戶")
 
                 }, 2000)
+            } else {
+                setTimeout(() => {
+
+                    setMsg("發生未知的錯誤")
+
+                }, 2000)
             }
             console.error(error)
         })

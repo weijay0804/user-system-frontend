@@ -1,31 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
     Container,
     Grid,
     Link,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
 import UserLoginForm from '../components/UserLoginForm';
 import UserRegisetrForm from '../components/UserRegisterForm';
 import ReminderText from '../components/ReminderText';
-import { useAuth } from '../hooks/useAuth';
 
 function AuthPage() {
 
     const [isLoginOn, setIsLoginOn] = useState(true);
     const [isRegistered, setIsRegistered] = useState(false);
-    const navigator = useNavigate();
-
-    const { isLogin } = useAuth();
-
-    useEffect(() => {
-        if (isLogin) {
-            navigator("/")
-        }
-    }, [isLogin, navigator])
-
-
 
     return (
         <Container component="main" maxWidth="xs">
