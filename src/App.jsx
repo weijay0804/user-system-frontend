@@ -7,6 +7,8 @@ import VerifiedAccountPage from './pages/VerifiedAccountPage';
 import UserMePage from './pages/UserMePage';
 import ProtectedRoute from './ProtectedRoute';
 import ForgetPasswordPage from './pages/ForgetPasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import UserResetPasswordPage from './pages/UserResetPasswordPage';
 
 function App() {
 
@@ -37,9 +39,21 @@ function App() {
               </ProtectedRoute>
             } />
 
+            <Route path='/auth/password/reset' element={
+              <ProtectedRoute requireAuth={false}>
+                <ResetPasswordPage />
+              </ProtectedRoute>
+            } />
+
             <Route path='/me' element={
               <ProtectedRoute requireAuth={true}>
                 <UserMePage />
+              </ProtectedRoute>
+            } />
+
+            <Route path='/user/reset-password' element={
+              <ProtectedRoute requireAuth={true}>
+                <UserResetPasswordPage />
               </ProtectedRoute>
             } />
 

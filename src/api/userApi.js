@@ -6,5 +6,11 @@ export const userApi = {
         return await apiHelper.get("users/me", {
             authRequired: true
         })
+    },
+
+    resetPassword: async (data) => {
+        return await apiHelper.put("users/password", data, {
+            authRequired: true
+        })
     }
 }
