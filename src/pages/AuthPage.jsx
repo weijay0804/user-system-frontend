@@ -36,7 +36,7 @@ function AuthPage() {
 
     return (
         <Container component="main" maxWidth="xs">
-            {isRegistered ? <AccountVerifiedRemind text="註冊成功，請至您的電子郵件中進行認證，10 秒後自動跳轉..." /> : <>
+            {isRegistered ? <AccountVerifiedRemind text="註冊成功，請至您的電子郵件中進行認證，5 秒後自動跳轉..." /> : <>
                 {isLoginOn ? <UserLoginForm /> : <UserRegisetrForm setIsRegistered={setIsRegistered} setIsLoginOn={setIsLoginOn} />}
                 <Grid container justifyContent="flex-end">
                     <Grid item>

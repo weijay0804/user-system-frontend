@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 
 
-import axios from 'axios';
+import { authApi } from '../api/authApi';
 import { useNavigate } from 'react-router-dom';
 
 function VerifiedAccountPage() {
@@ -26,43 +26,31 @@ function VerifiedAccountPage() {
     // 發送 API 至後端，並驗證帳戶
     // 驗證成功後跳轉至登入畫面
     useEffect(() => {
-        console.log("called")
 
-        const verifiyAccount = async () => {
+        authApi.accountVerify({ token, email }).then((res) => {
 
-            try {
-
-                const response = await axios.post("/auth/verifiy", {
-                    token,
-                    email
-                })
+            setTimeout(() => {
+                setMsg("驗證成功，將跳轉至登入畫面")
 
                 setTimeout(() => {
-                    setMsg("驗證成功，將跳轉至登入畫面")
 
-                    setTimeout(() => {
+                    navigate("/auth")
+                }, 2000)
 
-                        navigate("/auth")
-                    }, 2000)
+            }, 1000)
 
-                }, 1000)
+        }).catch((error) => {
+            if (error.response.status === 400) {
+                setTimeout(() => {
 
-            } catch (error) {
+                    setMsg("驗證失敗，請重新驗證您的帳戶")
 
-                if (error.response.status === 400) {
-                    setTimeout(() => {
-
-                        setMsg("驗證失敗，請重新驗證您的帳戶")
-
-                    }, 2000)
-                }
-                console.error(error)
+                }, 2000)
             }
-        };
+            console.error(error)
+        })
 
-        verifiyAccount();
-
-    }, [email, token, navigate])
+    }, [email, token])
 
     return (
         <Box

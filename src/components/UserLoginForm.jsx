@@ -6,11 +6,11 @@ import {
     Box,
     Snackbar,
 } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import { formatErrorMsg } from '../helper/responseHelper';
 import Alert from '../utils/Alert';
+import { authApi } from '../api/authApi';
 
 function UserLoginForm() {
 
@@ -25,25 +25,17 @@ function UserLoginForm() {
 
         e.preventDefault();
 
-        try {
+        authApi.login({ username: email, password: password }).then((res) => {
 
-            const response = await axios.postForm("/auth/login", {
-                username: email,
-                password: password
-            })
-
-            const access_token_data = response.data.access_token;
+            const access_token_data = res.data.access_token;
             const { token, expires_at } = access_token_data;
 
             localStorage.setItem("access_token", token);
             localStorage.setItem("access_token_expire", expires_at);
 
             window.dispatchEvent(new Event('storage'));
-            navigate("/")
-
-        } catch (error) {
-            console.error('Login failed:', error.response.data.detail);
-
+            navigate("/");
+        }).catch((error) => {
             if (error.response.data.detail === 'Your account is not verified.' || error.response.data.detail === 'Your account is not active.') {
                 setSnackbarMessage('請先驗證您的帳戶');
                 setSnackbarSeverity('warning');
@@ -55,7 +47,7 @@ function UserLoginForm() {
             setSnackbarMessage('登入失敗：' + (msg));
             setSnackbarSeverity('error');
             setOpenSnackbar(true);
-        }
+        })
     }
 
     const handleCloseSnackbar = (event, reason) => {

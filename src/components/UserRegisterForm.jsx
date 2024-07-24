@@ -6,9 +6,9 @@ import {
     Box,
     Snackbar,
 } from '@mui/material';
-import axios from 'axios';
 import Alert from '../utils/Alert';
 import { formatErrorMsg } from '../helper/responseHelper';
+import { authApi } from '../api/authApi';
 
 function UserRegisetrForm({ setIsRegistered, setIsLoginOn }) {
 
@@ -23,28 +23,22 @@ function UserRegisetrForm({ setIsRegistered, setIsLoginOn }) {
 
         e.preventDefault();
 
-        try {
-            const response = await axios.post("/users", {
-                email,
-                name,
-                password
-            });
+        authApi.signUp({ email, name, password }).then((res) => {
 
             setIsRegistered(true);
 
             setTimeout(() => {
                 setIsRegistered(false);
                 setIsLoginOn(true);
-            }, 10000)
+            }, 5000)
 
-
-        } catch (error) {
+        }).catch((error) => {
             console.error('Registration failed:', error.response.data.detail);
             const msg = formatErrorMsg(error.response.data.detail);
             setSnackbarMessage('註冊失敗：' + (msg));
             setSnackbarSeverity('error');
             setOpenSnackbar(true);
-        }
+        })
     }
 
     const handleCloseSnackbar = (event, reason) => {
