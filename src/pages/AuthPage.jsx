@@ -1,22 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
-    Button,
-    TextField,
     Container,
-    Typography,
-    Box,
     Grid,
     Link,
-    Snackbar,
 } from '@mui/material';
-import MuiAlert from '@mui/material/Alert';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import UserLoginForm from '../components/UserLoginForm';
 import UserRegisetrForm from '../components/UserRegisterForm';
 import AccountVerifiedRemind from '../components/AccountVerifiedRemind';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 function AuthPage() {
 
@@ -30,7 +23,7 @@ function AuthPage() {
         if (isLogin) {
             navigator("/")
         }
-    }, [])
+    }, [isLogin, navigator])
 
 
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
     Button,
     TextField,
@@ -23,7 +24,7 @@ function UserRegisetrForm({ setIsRegistered, setIsLoginOn }) {
 
         e.preventDefault();
 
-        authApi.signUp({ email, name, password }).then((res) => {
+        authApi.signUp({ email, name, password }).then(() => {
 
             setIsRegistered(true);
 
@@ -115,6 +116,11 @@ function UserRegisetrForm({ setIsRegistered, setIsLoginOn }) {
             </Snackbar>
         </>
     )
+}
+
+UserRegisetrForm.propTypes = {
+    setIsRegistered: PropTypes.func.isRequired,
+    setIsLoginOn: PropTypes.func.isRequired
 }
 
 export default UserRegisetrForm;

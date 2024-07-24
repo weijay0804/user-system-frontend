@@ -1,5 +1,5 @@
-import React, { useContext, createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { createContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const AuthContext = createContext();
 
@@ -47,5 +47,8 @@ const checkIsLogin = () => {
     return false;
 }
 
+AuthProvider.propTypes = {
+    children: PropTypes.node
+}
 
-export const useAuth = () => useContext(AuthContext);
+export default AuthContext;

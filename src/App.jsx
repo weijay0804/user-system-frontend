@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';
 import HomePage from './pages/HomePage';
@@ -8,12 +6,7 @@ import NavBar from './components/NavBar';
 import VerifiedAccountPage from './pages/VerifiedAccountPage';
 import UserMePage from './pages/UserMePage';
 
-
-axios.defaults.baseURL = 'http://127.0.0.1:8000'
-
 function App() {
-
-  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <Router>
@@ -23,7 +16,7 @@ function App() {
         <Box component="main" sx={{ flexGrow: 1, width: '100%', p: 3 }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/auth" element={<AuthPage setIsLogin={setIsLogin} />} />
+            <Route path="/auth" element={<AuthPage />} />
             <Route path='/auth/verifiy' element={<VerifiedAccountPage />} />
             <Route path='/me' element={<UserMePage />} />
           </Routes>

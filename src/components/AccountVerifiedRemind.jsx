@@ -2,8 +2,9 @@ import {
     Typography,
     Box,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 
-function AccountVerifiedRemind({ text }) {
+function AccountVerifiedRemind(props) {
 
     return (
         <Box
@@ -15,11 +16,15 @@ function AccountVerifiedRemind({ text }) {
             }}
         >
             <Typography component="h1" variant="h5">
-                {text}
+                {props.text}
             </Typography>
         </Box>
     );
 
+}
+
+AccountVerifiedRemind.propTypes = {
+    text: PropTypes.string.isRequired
 }
 
 export default AccountVerifiedRemind;

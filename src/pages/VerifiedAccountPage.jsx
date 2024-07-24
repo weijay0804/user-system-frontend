@@ -27,7 +27,7 @@ function VerifiedAccountPage() {
     // 驗證成功後跳轉至登入畫面
     useEffect(() => {
 
-        authApi.accountVerify({ token, email }).then((res) => {
+        authApi.accountVerify({ token, email }).then(() => {
 
             setTimeout(() => {
                 setMsg("驗證成功，將跳轉至登入畫面")
@@ -50,7 +50,7 @@ function VerifiedAccountPage() {
             console.error(error)
         })
 
-    }, [email, token])
+    }, [email, token, navigate])
 
     return (
         <Box
