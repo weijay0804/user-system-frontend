@@ -5,6 +5,7 @@ import { Box, CssBaseline } from '@mui/material';
 import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import NavBar from './components/NavBar';
+import VerifiedAccountPage from './pages/VerifiedAccountPage';
 
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/auth" element={<AuthPage setIsLogin={setIsLogin} />} />
+            <Route path='/auth/verifiy' element={<VerifiedAccountPage />} />
           </Routes>
         </Box>
       </Box>

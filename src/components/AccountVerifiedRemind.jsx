@@ -1,13 +1,6 @@
-import React, { useState } from 'react';
 import {
-    Button,
-    TextField,
-    Container,
     Typography,
     Box,
-    Grid,
-    Link,
-    Snackbar,
 } from '@mui/material';
 
 function AccountVerifiedRemind({ text }) {
