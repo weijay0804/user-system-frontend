@@ -4,21 +4,20 @@ import {
     TextField,
     Typography,
     Box,
-    Snackbar,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import { formatErrorMsg } from '../helper/responseHelper';
-import Alert from '../utils/Alert';
 import { authApi } from '../api/authApi';
+import FadeAlert from './FadeAlert';
 
 function UserLoginForm() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+    const [isAlertShow, setIsAlertShow] = useState(false);
     const navigate = useNavigate();
 
     async function handelSubmit(e) {
@@ -33,29 +32,38 @@ function UserLoginForm() {
             localStorage.setItem("access_token", token);
             localStorage.setItem("access_token_expire", expires_at);
 
+            const refresh_token_data = res.data.refresh_token;
+
+            localStorage.setItem("refresh_token", refresh_token_data.token);
+            localStorage.setItem("refresh_token_expire", refresh_token_data.expires_at);
+
             window.dispatchEvent(new Event('storage'));
-            navigate("/");
+
+            setIsAlertShow(true);
+            setSnackbarMessage('登入成功');
+            setSnackbarSeverity('success');
+
+            setTimeout(() => {
+                navigate("/");
+            }, 2000)
+
         }).catch((error) => {
             if (error.response.data.detail === 'Your account is not verified.' || error.response.data.detail === 'Your account is not active.') {
+                setIsAlertShow(true);
                 setSnackbarMessage('請先驗證您的帳戶');
                 setSnackbarSeverity('warning');
-                setOpenSnackbar(true);
+
                 return
             }
 
             const msg = formatErrorMsg(error.response.data.detail);
+            setIsAlertShow(true);
             setSnackbarMessage('登入失敗：' + (msg));
             setSnackbarSeverity('error');
-            setOpenSnackbar(true);
+
         })
     }
 
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpenSnackbar(false);
-    };
 
 
     return (
@@ -106,11 +114,7 @@ function UserLoginForm() {
                     </Button>
                 </Box>
             </Box>
-            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
-                    {snackbarMessage}
-                </Alert>
-            </Snackbar>
+            {isAlertShow && <FadeAlert text={snackbarMessage} severity={snackbarSeverity} fadeTime={6000} />}
         </>
     )
 }

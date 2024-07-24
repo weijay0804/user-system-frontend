@@ -5,6 +5,7 @@ import AuthPage from './pages/AuthPage';
 import NavBar from './components/NavBar';
 import VerifiedAccountPage from './pages/VerifiedAccountPage';
 import UserMePage from './pages/UserMePage';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
 
@@ -16,9 +17,25 @@ function App() {
         <Box component="main" sx={{ flexGrow: 1, width: '100%', p: 3 }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path='/auth/verifiy' element={<VerifiedAccountPage />} />
-            <Route path='/me' element={<UserMePage />} />
+
+            <Route path="/auth" element={
+              <ProtectedRoute requireAuth={false}>
+                <AuthPage />
+              </ProtectedRoute>
+            } />
+
+            <Route path='/auth/verifiy' element={
+              <ProtectedRoute requireAuth={false}>
+                <VerifiedAccountPage />
+              </ProtectedRoute>
+            } />
+
+            <Route path='/me' element={
+              <ProtectedRoute requireAuth={true}>
+                <UserMePage />
+              </ProtectedRoute>
+            } />
+
           </Routes>
         </Box>
       </Box>
