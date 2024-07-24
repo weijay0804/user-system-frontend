@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { userApi } from '../api/userApi';
+import ReminderText from '../components/ReminderText';
 
 function UserMePage() {
 
@@ -24,8 +25,7 @@ function UserMePage() {
 
     return (
         <div>
-            User Me <br />
-            {msg}
+            <ReminderText text={msg} />
         </div>
     )
 

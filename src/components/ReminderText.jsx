@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 
-function AccountVerifiedRemind(props) {
+function ReminderText(props) {
 
     return (
         <Box
@@ -23,8 +23,8 @@ function AccountVerifiedRemind(props) {
 
 }
 
-AccountVerifiedRemind.propTypes = {
+ReminderText.propTypes = {
     text: PropTypes.string.isRequired
 }
 
-export default AccountVerifiedRemind;
+export default ReminderText;

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 import UserLoginForm from '../components/UserLoginForm';
 import UserRegisetrForm from '../components/UserRegisterForm';
-import AccountVerifiedRemind from '../components/AccountVerifiedRemind';
+import ReminderText from '../components/ReminderText';
 import { useAuth } from '../hooks/useAuth';
 
 function AuthPage() {
@@ -29,7 +29,7 @@ function AuthPage() {
 
     return (
         <Container component="main" maxWidth="xs">
-            {isRegistered ? <AccountVerifiedRemind text="註冊成功，請至您的電子郵件中進行認證，5 秒後自動跳轉..." /> : <>
+            {isRegistered ? <ReminderText text="註冊成功，請至您的電子郵件中進行認證，5 秒後自動跳轉..." /> : <>
                 {isLoginOn ? <UserLoginForm /> : <UserRegisetrForm setIsRegistered={setIsRegistered} setIsLoginOn={setIsLoginOn} />}
                 <Grid container justifyContent="flex-end">
                     <Grid item>

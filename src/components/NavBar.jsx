@@ -16,6 +16,11 @@ function NavBar() {
                     <Button color="inherit" component={RouterLink} to="/">
                         首頁
                     </Button>
+                    {isLogin &&
+                        <Button color='inherit' component={RouterLink} to="/me">
+                            個人資料
+                        </Button>
+                    }
                     <Button color="inherit" component={RouterLink} to="/auth" onClick={isLogin ? logout : null}>
                         {isLogin ? '登出' : '登入/註冊'}
                     </Button>
