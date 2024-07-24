@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import NavBar from './components/NavBar';
 import VerifiedAccountPage from './pages/VerifiedAccountPage';
+import UserMePage from './pages/UserMePage';
 
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/auth" element={<AuthPage setIsLogin={setIsLogin} />} />
             <Route path='/auth/verifiy' element={<VerifiedAccountPage />} />
+            <Route path='/me' element={<UserMePage />} />
           </Routes>
         </Box>
       </Box>
