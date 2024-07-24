@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import VerifiedAccountPage from './pages/VerifiedAccountPage';
 import UserMePage from './pages/UserMePage';
 import ProtectedRoute from './ProtectedRoute';
+import ForgetPasswordPage from './pages/ForgetPasswordPage';
 
 function App() {
 
@@ -27,6 +28,12 @@ function App() {
             <Route path='/auth/verifiy' element={
               <ProtectedRoute requireAuth={false}>
                 <VerifiedAccountPage />
+              </ProtectedRoute>
+            } />
+
+            <Route path='/auth/forget' element={
+              <ProtectedRoute requireAuth={false}>
+                <ForgetPasswordPage />
               </ProtectedRoute>
             } />
 

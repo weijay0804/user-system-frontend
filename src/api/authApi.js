@@ -14,6 +14,10 @@ export const authApi = {
     accountVerify: async (data) => {
 
         return await apiHelper.post("/auth/verifiy", data)
+    },
+
+    forgotPassword: async (data) => {
+        return await apiHelper.post("/auth/forgot-password", data)
     }
 
 }
