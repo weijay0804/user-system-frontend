@@ -20,6 +20,13 @@ function UserLoginForm() {
     const [isAlertShow, setIsAlertShow] = useState(false);
     const navigate = useNavigate();
 
+    function showAlert() {
+        setIsAlertShow(true);
+        setTimeout(() => {
+            setIsAlertShow(false)
+        }, 6000)
+    }
+
     async function handelSubmit(e) {
 
         e.preventDefault();
@@ -39,9 +46,10 @@ function UserLoginForm() {
 
             window.dispatchEvent(new Event('storage'));
 
-            setIsAlertShow(true);
+
             setSnackbarMessage('登入成功');
             setSnackbarSeverity('success');
+            showAlert()
 
             setTimeout(() => {
                 navigate("/");
@@ -49,17 +57,24 @@ function UserLoginForm() {
 
         }).catch((error) => {
             if (error.response.data.detail === 'Your account is not verified.' || error.response.data.detail === 'Your account is not active.') {
-                setIsAlertShow(true);
+
                 setSnackbarMessage('請先驗證您的帳戶');
                 setSnackbarSeverity('warning');
+                showAlert()
+
+                setTimeout(() => {
+
+                    navigate("/auth/verifiy/reminder");
+                }, 1500)
 
                 return
             }
 
             const msg = formatErrorMsg(error.response.data.detail);
-            setIsAlertShow(true);
+
             setSnackbarMessage('登入失敗：' + (msg));
             setSnackbarSeverity('error');
+            showAlert()
 
         })
     }

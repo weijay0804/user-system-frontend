@@ -22,6 +22,10 @@ export const authApi = {
 
     resetPassword: async (data) => {
         return await apiHelper.put("auth/forgot-password/reset", data)
+    },
+
+    resendVerifyEmail: async (data) => {
+        return await apiHelper.post("auth/verifiy/resend", data)
     }
 
 }
