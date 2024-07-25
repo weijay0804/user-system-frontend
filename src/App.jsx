@@ -9,6 +9,7 @@ import ProtectedRoute from './ProtectedRoute';
 import ForgetPasswordPage from './pages/ForgetPasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import UserResetPasswordPage from './pages/UserResetPasswordPage';
+import VerifiedAccountReminderPage from './pages/VerifiedAccountReminderPage';
 
 function App() {
 
@@ -42,6 +43,12 @@ function App() {
             <Route path='/auth/password/reset' element={
               <ProtectedRoute requireAuth={false}>
                 <ResetPasswordPage />
+              </ProtectedRoute>
+            } />
+
+            <Route path='/auth/verifiy/reminder' element={
+              <ProtectedRoute requireAuth={false}>
+                <VerifiedAccountReminderPage />
               </ProtectedRoute>
             } />
 
